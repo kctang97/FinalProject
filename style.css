@@ -8,7 +8,10 @@ html, body {
 
 body {
 font-family: 'Satisfy', cursive;
+font-size: 20px;
+font-style: bold;
 }
+
 
 #BackgroundCanvas {
   position: fixed;
@@ -19,9 +22,7 @@ font-family: 'Satisfy', cursive;
 
 #output {
   text-align: center;
-
 }
-
 
 .center-div {
 border: double black;
@@ -94,8 +95,27 @@ text-align: center;
 
 /* Footer */
 .footer {
+  border: solid;
+  border-background: blue;
   float: left;
-	margin-top: 2500px;
+	margin-top: 10px;
 	margin-left: 2%;
   text-align: center;
+}
+
+
+/* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 800px) {
+  .leftcolumn, .rightcolumn {
+    width: 100%;
+    padding: 0;
+  }
+}
+
+/* Responsive layout - when the screen is less than 400px wide, make the navigation links stack on top of each other instead of next to each other */
+@media screen and (max-width: 400px) {
+  .topnav a {
+    float: none;
+    width: 100%;
+  }
 }

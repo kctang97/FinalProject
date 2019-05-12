@@ -8,6 +8,7 @@ var balls = []; //bouncse balls
 var type; //user input
 var output; //output text
 var submit; //button
+var textBox;
 
 function preload(){
   img = loadImage("images/earth.png"); //add image here
@@ -17,8 +18,6 @@ function preload(){
 function setup() {
   let canvas = createCanvas(windowWidth, windowHeight);
   canvas.parent('BackgroundCanvas');
-  //noStroke();
-  //fill(255, 153);
   for (var i = 0; i < num; i++) {
     mx.push(i);
     my.push(i);
@@ -29,6 +28,12 @@ function setup() {
     output = select("#output");
     submit = select("#submit");
     submit.mousePressed(newText);
+
+    //display text over background
+    submit.mousePressed(placeText);
+    placeText = select("#feeling");
+    textAlign(CENTER);
+    textSize(60);
 }
 
 function newTyping() {
@@ -40,6 +45,23 @@ function newText(){
   createP(type.value());
 }
 
+function placeText() {
+  const name = type.value();
+  placeText.html('hello ' + name + '!');
+  this.c = color(random(255), random(255), random(255));
+  type.value('');
+
+  for (let i = 0; i < 100; i++) {
+    push();
+    fill(this.c);
+    translate(random(1800), random(1500));
+    text(name, 0, 0);
+    pop();
+  }
+
+}
+
+//bounce ball
 function Ball() {
   x = 0;
   y = 0;
@@ -52,7 +74,7 @@ function Ball() {
   this.draw = function() {
     noStroke();
     fill(c);
-    rect(x, y, 15,15);
+    rect(x, y, 20, 20);
     x = x + speed.x;
     y = y + speed.y;
 
@@ -65,6 +87,7 @@ function Ball() {
   }
 }
 
+//recreate a boall after click
 function addBall() {
   var ball = new Ball();
   ball.x = mouseX;
@@ -73,7 +96,6 @@ function addBall() {
 }
 
 function draw() {
-
   // Cycle through the array, using a different entry on each frame.
   // Using modulo (%) like this is faster than moving all the values over.
   var which = frameCount % num;
