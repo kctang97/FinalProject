@@ -11,17 +11,22 @@ var submit; //button
 var textBox;
 
 function preload(){
-  img = loadImage("images/earth.png"); //add image here
+  img = loadImage("images/smileEmoji1.png"); //add image here
   sound = loadSound("audio/Laser.mp3"); // add audio
+  sound1 = loadSound("audio/windowxp.wav");
 }
 
 function setup() {
+  //backgound
+  noCursor();
   let canvas = createCanvas(windowWidth, windowHeight);
   canvas.parent('BackgroundCanvas');
   for (var i = 0; i < num; i++) {
     mx.push(i);
     my.push(i);
   }
+  //opening sound
+  sound1.play();
   //text input for message board
     type = select("#feeling");
     type.input(newTyping);
@@ -35,30 +40,30 @@ function setup() {
     textAlign(CENTER);
     textSize(60);
 }
-
+//display while user typing
 function newTyping() {
   output.html(type.value());
   output.parent('output');
 }
 
 function newText(){
-  createP(type.value());
+
 }
 
+//place text over the backgound
 function placeText() {
   const name = type.value();
   placeText.html('hello ' + name + '!');
   this.c = color(random(255), random(255), random(255));
   type.value('');
-
-  for (let i = 0; i < 100; i++) {
+//number of text
+  for (let i = 0; i < 150; i++) {
     push();
     fill(this.c);
     translate(random(1800), random(1500));
     text(name, 0, 0);
     pop();
   }
-
 }
 
 //bounce ball
@@ -69,7 +74,7 @@ function Ball() {
   speed= {
     x:random(-15,15),
     y:random(-15,15)
-  };
+  }; //speed
 
   this.draw = function() {
     noStroke();
@@ -108,14 +113,13 @@ function draw() {
     imageMode(CENTER);
     image(img, mx[index], my[index], i, i); //add image here
   }
-
+  //bounce ball
   for(var i = 0; i < balls.length; i++) {
     var ball = balls[i];
     ball.draw();
   }
-
 }
-
+//mousepress
 function mousePressed() {
   addBall();
   sound.play();

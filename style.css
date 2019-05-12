@@ -45,6 +45,7 @@ text-align: center;
 }
 
 .header h1 {
+  color: white;
   font-size: 30px;
 }
 /* Create two unequal columns that floats next to each other */
